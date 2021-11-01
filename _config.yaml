@@ -1,0 +1,37 @@
+
+# Initial w to optimize from. Can be set to ~ for None.
+initial_w: ~ 
+# Skip auto alignment of the images. Only use this if you already have aligned images.
+skip_alignment: False
+
+generator_path: resources/ffhq.pkl
+# generator_path: pti_resources/model_merkel.pt
+# Perform plain torch.load on the pkl, otherwise look for G_ema.
+generator_load_raw: False
+# Resolution of the trained generator.
+generator_native_resolution: [1024, 1024]
+
+# Default projection mode.
+projection_mode: w_projection
+# Projection mode arguments.
+projection_args:
+  lr_init: 1.0e-1
+  l2_loss_weight: 0
+  l1_loss_weight: 0.
+  noise_regularize_weight: 0. # 10000.
+  mean_latent_loss_weight: 10.
+  percept_downsample: 0.5
+
+# Set this to ~ [0.5 - 1] if you want faster projection at the cost of ui updates.
+minimum_projection_update_window: 0.1
+
+# Use this device for torch.
+device: cuda:0
+# Don't change this unless you want to do multimask descent.
+max_segments: 1
+# Save exported images here.
+export_directory: SavedImages
+
+# Skip loading some resources for high performance startup.
+ui_debug_run: False
+show_debug_menu: False
