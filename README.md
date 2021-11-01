@@ -9,6 +9,7 @@
 
 <p align="center">
 Teaser video with live editing sessiongs <a href="https://youtu.be/watch?v=JU1OVGCl6so">can be found here</a>  
+  
 Tutorial video: click below
   <a href="https://youtube.com/watch?v=aA7UaS67eZs">
     <img src="https://dcgi.felk.cvut.cz/~futscdav/chunkmogrify/video_thumbnail.jpg" />
