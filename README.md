@@ -8,15 +8,13 @@
 
 
 <p align="center">
-Teaser video with live editing sessiongs <a href="https://youtu.be/watch?v=JU1OVGCl6so">can be found here</a>  
-</p>
-
-<p align="center">
-Tutorial video: click below  <br/>
-  <a href="https://youtube.com/watch?v=aA7UaS67eZs">
-    <img src="https://dcgi.felk.cvut.cz/~futscdav/chunkmogrify/video_thumbnail.jpg" />
+Teaser video with live editing sessions can be found here  <br/>
+  <a href="https://youtu.be/watch?v=JU1OVGCl6so">
+    <img src="https://dcgi.felk.cvut.cz/~futscdav/chunkmogrify/teaser_thumbnail.jpg" />
   </a>
 </p>
+
+
 
 This code demonstrates the ideas discussed in arXiv submission *Real Image Inversion via Segments*.  
 http://arxiv.org/abs/2110.06269  
@@ -85,6 +83,13 @@ pip install torch -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
 ## Explanation of usage
+
+<p align="center">
+Tutorial video: click below  <br/>
+  <a href="https://youtube.com/watch?v=aA7UaS67eZs">
+    <img src="https://dcgi.felk.cvut.cz/~futscdav/chunkmogrify/video_thumbnail.jpg" />
+  </a>
+</p>
 
 Open an image using `File -> Image from File`. There is a sample image provided to check
 functionality.  
