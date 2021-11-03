@@ -18,7 +18,11 @@ Teaser video with live editing sessions can be found here  <br/>
 
 This code demonstrates the ideas discussed in arXiv submission *Real Image Inversion via Segments*.  
 http://arxiv.org/abs/2110.06269  
-(David Futschik, Michal Lukáč, Eli Shechtman, Daniel Sýkora)
+(David Futschik<sup>1</sup>, <a href="https://research.adobe.com/person/michal-lukac/">Michal Lukáč</a><sup>2</sup>, <a href="https://research.adobe.com/person/eli-shechtman/">Eli Shechtman</a><sup>2</sup>, <a href="https://dcgi.fel.cvut.cz/home/sykorad/">Daniel Sýkora</a><sup>1</sup>)  
+  
+<sup>1</sup>Czech Technical University in Prague  
+<sup>2</sup>Adobe Research  
+  
 
 *Abstract:  
 We present a simple, yet effective approach to editing
