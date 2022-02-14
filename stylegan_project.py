@@ -134,12 +134,13 @@ class StyleganProvider:
 
     def generate(self, input, mode):
         with torch.no_grad():
+            is_cpu = global_config().device == 'cpu'
             if mode == 'wplus' or mode == "wplus_projection":
-                i = self.g.synthesis(input, noise_mode='const')
+                i = self.g.synthesis(input, noise_mode='const', force_fp32=is_cpu)
             elif mode == 'w' or mode == "w_projection":
-                i = self.g.synthesis(input.repeat([1, self.num_ws(), 1]), noise_mode='const')
+                i = self.g.synthesis(input.repeat([1, self.num_ws(), 1]), noise_mode='const', force_fp32=is_cpu)
             elif mode == 's' or mode == 's_projection':
-                i = self.g.synthesis.forward_s(input, noise_mode='const')
+                i = self.g.synthesis.forward_s(input, noise_mode='const', force_fp32=is_cpu)
         return i
 
     def generate_numpy(self, input, mode):
