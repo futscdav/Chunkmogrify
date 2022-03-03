@@ -419,7 +419,7 @@ class StyleganProjector:
         dist = 1.-torch.mm(x, y_t)/x_norm/y_norm
         return dist
 
-    def _calc_loss(self, x, w=None):
+    def _calc_loss(self, x, w=None, wplus=None):
         size = (int(x.shape[2] * self.percept_downsample), int(x.shape[3] * self.percept_downsample))
         if not hasattr(self, 'precomputed_loss_data'):
             self.precomputed_loss_data = dotdict()
@@ -435,10 +435,7 @@ class StyleganProjector:
         synth_images = (x + 1) * (255./2)
         synth_images = F.interpolate(synth_images, size=size, mode='area')
         synth_features = self.provider.vgg(synth_images)
-        # vgg_dist = self._pairwise_distances_cos(synth_features, self.precomputed_loss_data.target_features) # (synth_features - self.precomputed_loss_data.target_features).square().sum()
         vgg_dist = (synth_features - self.precomputed_loss_data.target_features).square().sum()
-        
-        # print(vgg_dist, synth_features.shape)
         loss += vgg_dist
 
         if self.l1_loss_weight > 0.:
@@ -447,11 +444,17 @@ class StyleganProjector:
         if self.l2_loss_weight > 0.:
             loss += self.l2_loss_weight * F.mse_loss(x, self.target_image[0:1])
 
-        if self.mean_latent_loss_weight > 0.:
+        if self.mean_latent_loss_weight > 0. and w is not None:
             loss += self.mean_latent_loss_weight * (
                 ((w - torch.tensor(self.provider.mean_latent).to(self.device)) 
                     / torch.tensor(self.provider.std_latent).to(self.device)) ** 2
             ).mean()
+
+        if self.mean_latent_loss_weight > 0. and wplus is not None:
+            loss += self.mean_latent_loss_weight * (
+                ((wplus - torch.tensor(self.provider.mean_latent).to(self.device)) 
+                    / torch.tensor(self.provider.std_latent).to(self.device)) ** 2
+            ).mean() / wplus.shape[1]
 
         # noise regularization
         if self.noise_regularize_weight > 0.:
@@ -642,7 +645,7 @@ class StyleganWPlusProjector(StyleganProjector):
         # mask out for loss calc
         res = self.mask_compose(res)
 
-        loss = self._calc_loss(res)
+        loss = self._calc_loss(res, wplus=self.current_wplus)
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
