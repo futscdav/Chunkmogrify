@@ -10,9 +10,9 @@ from setuptools import sandbox
 
 platform_specific_flags = []
 if platform.system() == "Windows":
-    platform_specific_flags += ["/permissive-", "/Ox"]
+    platform_specific_flags += ["/permissive-", "/Ox", "/std:c++11"]
 else:
-    platform_specific_flags += ["-O3"]
+    platform_specific_flags += ["-O3", "--std=c++11"]
 
 ext_modules = [
     setuptools.Extension('_C_canvas',
